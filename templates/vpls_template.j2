@@ -1,0 +1,29 @@
+      <shutdown>false</shutdown>
+      <description>
+        <description-string>{{ svc.service.type }}*{{ svc.service.class}}*{{ svc.service.descr|replace(" ", "_")}}</description-string>
+      </description>
+      <service-mtu>
+        <octets>9018</octets>
+      </service-mtu>
+      <bgp>
+        <bgp-instance>2</bgp-instance>
+        <route-distinguisher>
+          <rd>6758:{{ svc.service.svc_id }}{{ pe.loopback[host.hostname]['id'] }}</rd>
+        </route-distinguisher>
+        <route-target>
+          <export>target:6758:{{ svc.service.svc_id }}</export>
+          <import>target:6758:{{ svc.service.svc_id }}</import>
+        </route-target>
+      </bgp>
+      <bgp-evpn>
+        <mpls>
+          <bgp>2</bgp>
+          <ingress-replication-bum-label>true</ingress-replication-bum-label>
+          <auto-bind-tunnel>
+            <resolution>
+              <disabled-any-filter>any</disabled-any-filter>
+            </resolution>
+          </auto-bind-tunnel>
+          <shutdown>false</shutdown>
+        </mpls>
+      </bgp-evpn>

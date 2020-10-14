@@ -1,0 +1,22 @@
+---
+WAN_GROUP:
+    platform: alcatel_sros
+    use_keys: True
+    username: netconf
+    password: 'mypwd'
+    connection_options:
+        netmiko:
+            extras:
+                use_keys: True
+                key_file: /home/fouine/.ssh/netconf-key
+                transport_options: {
+                    'open_cmd': [ '-o', 'KexAlgorithms=+diffie-hellman-group1-sha1' ]
+                }
+        scrapli_netconf:
+            port: 830
+            extras:
+                transport_options: {
+                    'open_cmd': [ '-o', 'KexAlgorithms=+diffie-hellman-group1-sha1' ]
+                }
+                ssh_config_file: True
+                auth_strict_key: False

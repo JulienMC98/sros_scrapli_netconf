@@ -1,0 +1,21 @@
+<config xmlns="urn:ietf:params:xml:ns:netconf:base:1.0">
+  <configure xmlns="urn:alcatel-lucent.com:sros:ns:yang:conf-r13">
+{% if host['port_cfg'] is defined %}
+{{host['port_cfg']}}
+{%- endif %}
+{% if host['svc_cfg'] is defined or host['sap_cfg'] is defined %}
+    <service>
+      <vpls operation="merge">
+      <service-id>{{ svc.service.svc_id }}</service-id>
+      <customer>1</customer>
+{% if host['svc_cfg'] is defined %}
+{{host['svc_cfg']}}
+{% endif %}
+{% if host['sap_cfg'] is defined %}
+{{host['sap_cfg']}}
+{%- endif %}
+      </vpls>
+    </service>
+{% endif %}
+  </configure>
+</config>
