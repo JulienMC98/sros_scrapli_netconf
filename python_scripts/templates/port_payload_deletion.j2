@@ -1,0 +1,15 @@
+{% for item in svc.attach_circuit_wan %}
+{% if host.hostname == item.hostname %}
+      <port>
+        <port-id>{{item.port}}</port-id>
+        <description operation="delete">
+        </description>
+        <shutdown operation="merge">true</shutdown>
+        <ethernet>
+          <mode>
+            <access-network-hybrid>network</access-network-hybrid>
+          </mode>
+        </ethernet>
+      </port>
+{% endif %}
+{% endfor %}

@@ -1,0 +1,12 @@
+{% for item in svc.attach_circuit_wan %}
+{% if host.hostname == item.hostname %}
+          <sap operation="delete">
+{% if item.vlan == "" %}
+            <sap-id>{{ item.port }}</sap-id>
+{% else %}
+            <sap-id>{{ item.port }}:{{ item.vlan }}</sap-id>
+{% endif %}
+            <shutdown operation="merge">true</shutdown>
+          </sap>
+{% endif %}
+{% endfor %}

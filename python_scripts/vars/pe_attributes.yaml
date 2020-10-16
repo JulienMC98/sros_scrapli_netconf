@@ -1,0 +1,24 @@
+---
+pe:
+  loopback:
+    PE01LT2:
+      id: 1
+    PE02LT2:
+      id: 2
+  qos:
+    BE:
+      fprdgrp: dc-vxlan-be
+      qos_id: 1
+      queue_id: 1
+    AF:
+      fprdgrp: dc-vxlan-af
+      qos_id: 6003
+      queue_id: 3
+    EF:
+      fprdgrp: dc-vxlan-ef
+      qos_id: 6001
+      queue_id: 6
+    H1:
+      fprdgrp: dc-vxlan-h1
+      qos_id: 6000
+      queue_id: 7

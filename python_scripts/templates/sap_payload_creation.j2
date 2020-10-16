@@ -1,0 +1,43 @@
+{% for item in svc.attach_circuit_wan %}
+{% if host.hostname == item.hostname %}
+          <sap operation="merge">
+{% if item.vlan == "" %}
+            <sap-id>{{ item.port }}</sap-id>
+{% else %}
+            <sap-id>{{ item.port }}:{{ item.vlan }}</sap-id>
+{% endif %}
+            <description>
+              <long-description-string>{{ svc.service.type }}*{{ svc.service.class}}*{{ item.sap_descr|replace(" ", "_")}}</long-description-string>
+            </description>
+            <ingress>
+              <qos>
+                <policy-id>{{pe.qos[item.qos]['qos_id']}}</policy-id>
+              </qos>
+              <queue-override>
+                <queue>
+                  <queue-id>{{pe.qos[item.qos]['queue_id']}}</queue-id>
+                  <rate>
+                    <pir-rate>{{item.pir}}</pir-rate>
+                    <cir>{{item.cir}}</cir>
+                  </rate>
+                </queue>
+              </queue-override>
+            </ingress>
+            <egress>
+              <qos>
+                <policy-id>{{pe.qos[item.qos]['qos_id']}}</policy-id>
+              </qos>
+              <queue-override>
+                <queue>
+                  <queue-id>{{pe.qos[item.qos]['queue_id']}}</queue-id>
+                  <rate>
+                    <pir-rate>{{item.pir}}</pir-rate>
+                    <cir>{{item.cir}}</cir>
+                  </rate>
+                </queue>
+              </queue-override>
+            </egress>
+            <shutdown>false</shutdown>
+          </sap>
+{% endif %}
+{% endfor %}

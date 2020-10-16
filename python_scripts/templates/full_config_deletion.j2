@@ -1,0 +1,29 @@
+<config xmlns="urn:ietf:params:xml:ns:netconf:base:1.0">
+  <configure xmlns="urn:alcatel-lucent.com:sros:ns:yang:conf-r13">
+{% if host['SVC'] is defined and host['SAP'] is not defined %}
+    <service>
+      <vpls operation="delete">
+      <service-id>{{ svc.service.svc_id }}</service-id>
+      </vpls>
+    </service>
+{% elif host['SVC'] is not defined and host['SAP'] is defined %}
+    <service>
+      <vpls operation="merge">
+      <service-id>{{ svc.service.svc_id }}</service-id>
+{{host['SAP']}}
+      </vpls>
+    </service>
+{% elif host['SVC'] is defined and host['SAP'] is defined %}
+    <service>
+      <vpls operation="delete">
+      <service-id>{{ svc.service.svc_id }}</service-id>
+{{host['SVC']}}
+{{host['SAP']}}
+      </vpls>
+    </service>
+{%- endif %}
+{% if host['PORT'] is defined %}
+{{host['PORT']}}
+{%- endif %}
+  </configure>
+</config>

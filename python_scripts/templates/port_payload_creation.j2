@@ -1,0 +1,22 @@
+{% for item in svc.attach_circuit_wan %}
+{% if host.hostname == item.hostname %}
+      <port>
+        <port-id>{{item.port}}</port-id>
+        <description>
+          <long-description-string>{{item.port_nd}}*{{item.port_descr}}</long-description-string>
+        </description>
+        <ethernet>
+          <mode>
+            <access-network-hybrid>access</access-network-hybrid>
+          </mode>
+          <encap-type>
+            <dot1q-null-qinq>{{item.port_encap}}</dot1q-null-qinq>
+          </encap-type>
+          <mtu>
+            <mtu-bytes>{{item.mtu}}</mtu-bytes>
+          </mtu>
+        </ethernet>
+        <shutdown>false</shutdown>
+      </port>
+{% endif %}
+{% endfor %}
