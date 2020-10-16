@@ -24,3 +24,6 @@ usage: vpls_service_config.py [-h] --file FILE [--port] [--sap] [--svc] (--creat
 
 python3 vpls_service_config.py --file "../vars/wan_l2vpn.yaml" --create --svc --sap --port<br/>
 python3 vpls_service_config.py --file "../vars/wan_l2vpn.yaml" --delete --svc --sap --port<br/>
+
+## Thanks
+A big thank you to Carl Montanari for his tips when I was stuck with errors.
